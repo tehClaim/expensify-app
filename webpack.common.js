@@ -1,8 +1,16 @@
-const path = require('path'); //load module path from node js
-
+const path = require('path');
+//const CleanWebpackPlugin = require('clean-webpack-plugin');
+//const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-  entry: './src/app.js',
-  // entry: './src/playground/hoc.js',
+  entry: {
+    app: './src/app.js'
+  },
+/*   plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      title: 'Production'
+    })
+  ], */
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
@@ -20,11 +28,5 @@ module.exports = {
         'sass-loader'
       ]
     }]
-  },
-  mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    historyApiFallback: true
   }
 };

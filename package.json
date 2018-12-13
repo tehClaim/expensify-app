@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "serve": "live-server public/",
-    "build": "webpack",
-    "dev-server": "webpack-dev-server",
+    "build:dev": "webpack --config webpack.dev.js",
+    "build:prod": "webpack --config webpack.prod.js",
+    "dev-server": "webpack-dev-server --config webpack.dev.js",
     "test": "jest --config=jest.config.json"
   },
   "dependencies": {
@@ -18,10 +19,12 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^1.0.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-to-json": "^3.3.4",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
     "live-server": "^1.2.0",
     "moment": "^2.22.2",
@@ -42,10 +45,10 @@
     "uuid": "^3.3.2",
     "validator": "^10.8.0",
     "webpack": "^4.23.0",
-    "webpack-dev-server": "^3.1.10"
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.5"
   },
   "devDependencies": {
     "webpack-cli": "^3.1.2"
   }
-
 }
