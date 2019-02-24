@@ -16,4 +16,7 @@ const jsx = (
   </Provider>
 );
 
+const element = document.createElement('div');
+element.setAttribute('id', 'app');
+document.body.appendChild(element);
 ReactDOM.render(jsx, document.getElementById('app'));
