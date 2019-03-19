@@ -11,7 +11,7 @@ module.exports = {
     new CleanWebpackPlugin(['public/*']),
     new HtmlWebpackPlugin({
       title: 'Expensify App',
-      filename: '../index.html'
+      filename: 'index.html'
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
