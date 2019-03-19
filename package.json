@@ -5,8 +5,7 @@
   "author": "ksh",
   "license": "MIT",
   "scripts": {
-    "serve": "live-server public/",
-    "dev-serve": "webpack-dev-server --open --config webpack.dev.js",
+    "dev-server": "webpack-dev-server --open --config webpack.dev.js",
     "build:prod": "webpack --config webpack.prod.js",
     "build:dev": "webpack --config webpack.dev.js",
     "test": "jest --config=jest.config.json",
@@ -23,14 +22,9 @@
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^1.0.1",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.7.0",
-    "enzyme-to-json": "^3.3.4",
     "express": "^4.16.4",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^3.2.0",
-    "jest": "^23.6.0",
-    "live-server": "^1.2.1",
     "mini-css-extract-plugin": "^0.5.0",
     "moment": "^2.22.2",
     "node-sass": "^4.9.4",
@@ -43,7 +37,6 @@
     "react-modal": "^3.6.1",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
-    "react-test-renderer": "^16.6.3",
     "redux": "^4.0.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
@@ -53,7 +46,13 @@
     "webpack-merge": "^4.1.5"
   },
   "devDependencies": {
-    "webpack-cli": "^3.1.2",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-to-json": "^3.3.4",
+    "jest": "^23.6.0",
+    "live-server": "^1.2.1",
+    "react-test-renderer": "^16.6.3",
+    "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.0"
   }
 }

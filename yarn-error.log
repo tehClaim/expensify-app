@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn build:prod
+  /usr/bin/node /usr/bin/yarn run serve
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
@@ -8,7 +8,7 @@ Yarn version:
   1.5.1
 
 Node version: 
-  11.10.0
+  11.12.0
 
 Platform: 
   linux x64
@@ -21,11 +21,12 @@ npm manifest:
     "author": "ksh",
     "license": "MIT",
     "scripts": {
-      "serve": "live-server public/",
-      "start": "webpack-dev-server --open --config webpack.dev.js",
+      "dev-server": "webpack-dev-server --open --config webpack.dev.js",
       "build:prod": "webpack --config webpack.prod.js",
       "build:dev": "webpack --config webpack.dev.js",
-      "test": "jest --config=jest.config.json"
+      "test": "jest --config=jest.config.json",
+      "start": "node server/server.js",
+      "heroku-postbuild": "yarn run build:prod"
     },
     "dependencies": {
       "babel-cli": "^6.26.0",
@@ -37,13 +38,10 @@ npm manifest:
       "babel-preset-react": "^6.24.1",
       "clean-webpack-plugin": "^1.0.0",
       "css-loader": "^1.0.1",
-      "enzyme": "^3.7.0",
-      "enzyme-adapter-react-16": "^1.7.0",
-      "enzyme-to-json": "^3.3.4",
+      "express": "^4.16.4",
       "extract-text-webpack-plugin": "^3.0.2",
       "html-webpack-plugin": "^3.2.0",
-      "jest": "^23.6.0",
-      "live-server": "^1.2.1",
+      "mini-css-extract-plugin": "^0.5.0",
       "moment": "^2.22.2",
       "node-sass": "^4.9.4",
       "normalize.css": "^8.0.0",
@@ -55,7 +53,6 @@ npm manifest:
       "react-modal": "^3.6.1",
       "react-redux": "^5.1.1",
       "react-router-dom": "^4.3.1",
-      "react-test-renderer": "^16.6.3",
       "redux": "^4.0.1",
       "sass-loader": "^7.1.0",
       "style-loader": "^0.23.1",
@@ -65,7 +62,13 @@ npm manifest:
       "webpack-merge": "^4.1.5"
     },
     "devDependencies": {
-      "webpack-cli": "^3.1.2",
+      "enzyme": "^3.7.0",
+      "enzyme-adapter-react-16": "^1.7.0",
+      "enzyme-to-json": "^3.3.4",
+      "jest": "^23.6.0",
+      "live-server": "^1.2.1",
+      "react-test-renderer": "^16.6.3",
+      "webpack-cli": "^3.2.3",
       "webpack-dev-server": "^3.2.0"
     }
   }
@@ -1461,6 +1464,10 @@ Lockfile:
     version "4.1.0"
     resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
   
+  camelcase@^5.0.0:
+    version "5.0.0"
+    resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.0.0.tgz#03295527d58bd3cd4aa75363f35b2e8d97be2f42"
+  
   caniuse-lite@^1.0.30000844:
     version "1.0.30000846"
     resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000846.tgz#2092911eecad71a89dae1faa62bcc202fde7f959"
@@ -1973,7 +1980,7 @@ Lockfile:
     dependencies:
       ms "^2.1.1"
   
-  decamelize@^1.1.1, decamelize@^1.1.2:
+  decamelize@^1.1.1, decamelize@^1.1.2, decamelize@^1.2.0:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
   
@@ -2074,6 +2081,10 @@ Lockfile:
   destroy@~1.0.4:
     version "1.0.4"
     resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
+  
+  detect-file@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/detect-file/-/detect-file-1.0.0.tgz#f0d66d03672a825cb1b73bdb3fe62310c8e552b7"
   
   detect-indent@^4.0.0:
     version "4.0.0"
@@ -2509,6 +2520,12 @@ Lockfile:
     dependencies:
       fill-range "^2.1.0"
   
+  expand-tilde@^2.0.0, expand-tilde@^2.0.2:
+    version "2.0.2"
+    resolved "https://registry.yarnpkg.com/expand-tilde/-/expand-tilde-2.0.2.tgz#97e801aa052df02454de46b02bf621642cdc8502"
+    dependencies:
+      homedir-polyfill "^1.0.1"
+  
   expect@^23.6.0:
     version "23.6.0"
     resolved "https://registry.yarnpkg.com/expect/-/expect-23.6.0.tgz#1e0c8d3ba9a581c87bd71fb9bc8862d443425f98"
@@ -2520,7 +2537,7 @@ Lockfile:
       jest-message-util "^23.4.0"
       jest-regex-util "^23.3.0"
   
-  express@^4.16.2:
+  express@^4.16.2, express@^4.16.4:
     version "4.16.4"
     resolved "https://registry.yarnpkg.com/express/-/express-4.16.4.tgz#fddef61926109e24c515ea97fd2f1bdbf62df12e"
     dependencies:
@@ -2739,6 +2756,15 @@ Lockfile:
     dependencies:
       locate-path "^3.0.0"
   
+  findup-sync@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/findup-sync/-/findup-sync-2.0.0.tgz#9326b1488c22d1a6088650a86901b2d9a90a2cbc"
+    dependencies:
+      detect-file "^1.0.0"
+      is-glob "^3.1.0"
+      micromatch "^3.0.4"
+      resolve-dir "^1.0.1"
+  
   flush-write-stream@^1.0.0:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.0.3.tgz#c5d586ef38af6097650b49bc41b55fabb19f35bd"
@@ -2952,9 +2978,23 @@ Lockfile:
       define-properties "^1.1.2"
       is-symbol "^1.0.1"
   
-  global-modules-path@^2.3.0:
-    version "2.3.0"
-    resolved "https://registry.yarnpkg.com/global-modules-path/-/global-modules-path-2.3.0.tgz#b0e2bac6beac39745f7db5c59d26a36a0b94f7dc"
+  global-modules@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/global-modules/-/global-modules-1.0.0.tgz#6d770f0eb523ac78164d72b5e71a8877265cc3ea"
+    dependencies:
+      global-prefix "^1.0.1"
+      is-windows "^1.0.1"
+      resolve-dir "^1.0.0"
+  
+  global-prefix@^1.0.1:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/global-prefix/-/global-prefix-1.0.2.tgz#dbf743c6c14992593c655568cb66ed32c0122ebe"
+    dependencies:
+      expand-tilde "^2.0.2"
+      homedir-polyfill "^1.0.1"
+      ini "^1.3.4"
+      is-windows "^1.0.1"
+      which "^1.2.14"
   
   globals@^9.18.0:
     version "9.18.0"
@@ -3118,6 +3158,12 @@ Lockfile:
     dependencies:
       os-homedir "^1.0.0"
       os-tmpdir "^1.0.1"
+  
+  homedir-polyfill@^1.0.1:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/homedir-polyfill/-/homedir-polyfill-1.0.3.tgz#743298cef4e5af3e194161fbadcc2151d3a058e8"
+    dependencies:
+      parse-passwd "^1.0.0"
   
   hosted-git-info@^2.1.4:
     version "2.7.1"
@@ -3324,7 +3370,7 @@ Lockfile:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.1.tgz#b17d08d326b4423e568eff719f91b0b1cbdf69f1"
   
-  ini@~1.3.0:
+  ini@^1.3.4, ini@~1.3.0:
     version "1.3.5"
     resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   
@@ -3336,8 +3382,8 @@ Lockfile:
       ipaddr.js "^1.9.0"
   
   interpret@^1.1.0:
-    version "1.1.0"
-    resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"
   
   invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
     version "2.2.4"
@@ -3599,7 +3645,7 @@ Lockfile:
     version "0.2.1"
     resolved "https://registry.yarnpkg.com/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
   
-  is-windows@^1.0.2:
+  is-windows@^1.0.1, is-windows@^1.0.2:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/is-windows/-/is-windows-1.0.2.tgz#d1850eb9791ecd18e6182ce12a30f396634bb19d"
   
@@ -4402,7 +4448,7 @@ Lockfile:
       parse-glob "^3.0.4"
       regex-cache "^0.4.2"
   
-  micromatch@^3.1.10, micromatch@^3.1.4, micromatch@^3.1.8:
+  micromatch@^3.0.4, micromatch@^3.1.10, micromatch@^3.1.4, micromatch@^3.1.8:
     version "3.1.10"
     resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-3.1.10.tgz#70859bc95c9840952f359a068a3fc49f9ecfac23"
     dependencies:
@@ -4448,6 +4494,14 @@ Lockfile:
   mimic-fn@^1.0.0:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"
+  
+  mini-css-extract-plugin@^0.5.0:
+    version "0.5.0"
+    resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-0.5.0.tgz#ac0059b02b9692515a637115b0cc9fed3a35c7b0"
+    dependencies:
+      loader-utils "^1.1.0"
+      schema-utils "^1.0.0"
+      webpack-sources "^1.1.0"
   
   minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
     version "1.0.1"
@@ -5092,6 +5146,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/parse-json/-/parse-json-2.2.0.tgz#f480f40434ef80741f8469099f8dea18f55a4dc9"
     dependencies:
       error-ex "^1.2.0"
+  
+  parse-passwd@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/parse-passwd/-/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
   
   parse5@4.0.0:
     version "4.0.0"
@@ -5860,6 +5918,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/resolve-cwd/-/resolve-cwd-2.0.0.tgz#00a9f7387556e27038eae232caa372a6a59b665a"
     dependencies:
       resolve-from "^3.0.0"
+  
+  resolve-dir@^1.0.0, resolve-dir@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/resolve-dir/-/resolve-dir-1.0.1.tgz#79a40644c362be82f26effe739c9bb5382046f43"
+    dependencies:
+      expand-tilde "^2.0.0"
+      global-modules "^1.0.0"
   
   resolve-from@^3.0.0:
     version "3.0.0"
@@ -6888,20 +6953,21 @@ Lockfile:
     version "4.0.2"
     resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
   
-  webpack-cli@^3.1.2:
-    version "3.1.2"
-    resolved "https://registry.yarnpkg.com/webpack-cli/-/webpack-cli-3.1.2.tgz#17d7e01b77f89f884a2bbf9db545f0f6a648e746"
+  webpack-cli@^3.2.3:
+    version "3.2.3"
+    resolved "https://registry.yarnpkg.com/webpack-cli/-/webpack-cli-3.2.3.tgz#13653549adfd8ccd920ad7be1ef868bacc22e346"
     dependencies:
       chalk "^2.4.1"
       cross-spawn "^6.0.5"
       enhanced-resolve "^4.1.0"
-      global-modules-path "^2.3.0"
+      findup-sync "^2.0.0"
+      global-modules "^1.0.0"
       import-local "^2.0.0"
       interpret "^1.1.0"
       loader-utils "^1.1.0"
       supports-color "^5.5.0"
       v8-compile-cache "^2.0.2"
-      yargs "^12.0.2"
+      yargs "^12.0.4"
   
   webpack-dev-middleware@^3.5.1:
     version "3.6.0"
@@ -7045,7 +7111,7 @@ Lockfile:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/which-module/-/which-module-2.0.0.tgz#d9ef07dce77b9902b8a3a8fa4b31c3e3f7e6e87a"
   
-  which@1, which@^1.2.12, which@^1.2.9, which@^1.3.0:
+  which@1, which@^1.2.12, which@^1.2.14, which@^1.2.9, which@^1.3.0:
     version "1.3.1"
     resolved "https://registry.yarnpkg.com/which/-/which-1.3.1.tgz#a45043d54f5805316da8d62f9f50918d3da70b0a"
     dependencies:
@@ -7130,6 +7196,13 @@ Lockfile:
     dependencies:
       camelcase "^4.1.0"
   
+  yargs-parser@^11.1.1:
+    version "11.1.1"
+    resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-11.1.1.tgz#879a0865973bca9f6bab5cbdf3b1c67ec7d3bcf4"
+    dependencies:
+      camelcase "^5.0.0"
+      decamelize "^1.2.0"
+  
   yargs-parser@^5.0.0:
     version "5.0.0"
     resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-5.0.0.tgz#275ecf0d7ffe05c77e64e7c86e4cd94bf0e1228a"
@@ -7142,7 +7215,7 @@ Lockfile:
     dependencies:
       camelcase "^4.1.0"
   
-  yargs@12.0.2, yargs@^12.0.2:
+  yargs@12.0.2:
     version "12.0.2"
     resolved "https://registry.yarnpkg.com/yargs/-/yargs-12.0.2.tgz#fe58234369392af33ecbef53819171eff0f5aadc"
     dependencies:
@@ -7176,6 +7249,23 @@ Lockfile:
       y18n "^3.2.1"
       yargs-parser "^9.0.2"
   
+  yargs@^12.0.4:
+    version "12.0.5"
+    resolved "https://registry.yarnpkg.com/yargs/-/yargs-12.0.5.tgz#05f5997b609647b64f66b81e3b4b10a368e7ad13"
+    dependencies:
+      cliui "^4.0.0"
+      decamelize "^1.2.0"
+      find-up "^3.0.0"
+      get-caller-file "^1.0.1"
+      os-locale "^3.0.0"
+      require-directory "^2.1.1"
+      require-main-filename "^1.0.1"
+      set-blocking "^2.0.0"
+      string-width "^2.0.0"
+      which-module "^2.0.0"
+      y18n "^3.2.1 || ^4.0.0"
+      yargs-parser "^11.1.1"
+  
   yargs@^7.0.0:
     version "7.1.0"
     resolved "https://registry.yarnpkg.com/yargs/-/yargs-7.1.0.tgz#6ba318eb16961727f5d284f8ea003e8d6154d0c8"
@@ -7195,16 +7285,14 @@ Lockfile:
       yargs-parser "^5.0.0"
 
 Trace: 
-  Error: Command failed.
-  Exit code: 1
-  Command: sh
-  Arguments: -c webpack --config webpack.prod.js
-  Directory: /home/ksh/projects/expensify-app
-  Output:
-  
-      at ProcessTermError.MessageError (/usr/lib/node_modules/yarn/lib/cli.js:186:110)
-      at new ProcessTermError (/usr/lib/node_modules/yarn/lib/cli.js:226:113)
-      at ChildProcess.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:30281:17)
-      at ChildProcess.emit (events.js:197:13)
-      at maybeClose (internal/child_process.js:984:16)
-      at Process.ChildProcess._handle.onexit (internal/child_process.js:265:5)
+  Error: Command "serve" not found.
+      at new MessageError (/usr/lib/node_modules/yarn/lib/cli.js:186:110)
+      at /usr/lib/node_modules/yarn/lib/cli.js:87307:17
+      at Generator.next (<anonymous>)
+      at step (/usr/lib/node_modules/yarn/lib/cli.js:98:30)
+      at /usr/lib/node_modules/yarn/lib/cli.js:116:14
+      at new Promise (<anonymous>)
+      at new F (/usr/lib/node_modules/yarn/lib/cli.js:23451:28)
+      at /usr/lib/node_modules/yarn/lib/cli.js:95:12
+      at runCommand (/usr/lib/node_modules/yarn/lib/cli.js:87312:22)
+      at Object.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:87412:14)

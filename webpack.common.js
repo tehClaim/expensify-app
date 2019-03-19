@@ -10,7 +10,8 @@ module.exports = {
    plugins: [
     new CleanWebpackPlugin(['public/*']),
     new HtmlWebpackPlugin({
-      title: 'Production'
+      title: 'Expensify App',
+      filename: '../index.html'
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
@@ -18,9 +19,10 @@ module.exports = {
     })
   ], 
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, 'public', 'dist'),
     filename: '[name].bundle.js'
   },
+
   module: {
     rules: [{
       loader: 'babel-loader',
