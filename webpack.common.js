@@ -17,7 +17,9 @@ module.exports = {
     app: './src/app.js'
   },
    plugins: [
-    new CleanWebpackPlugin(['public/*']),
+    new CleanWebpackPlugin(
+      ['public/dist/*']
+    ),
     new HtmlWebpackPlugin({
       title: 'Expensify App',
       filename: 'index.html'
