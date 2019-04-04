@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn test
+  /usr/bin/node /usr/bin/yarn build:prod
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
@@ -34,6 +34,7 @@ npm manifest:
       "babel-loader": "7",
       "babel-plugin-transform-class-properties": "^6.24.1",
       "babel-plugin-transform-object-rest-spread": "^6.26.0",
+      "babel-polyfill": "^6.26.0",
       "babel-preset-env": "^1.7.0",
       "babel-preset-react": "^6.24.1",
       "clean-webpack-plugin": "^1.0.0",
@@ -7571,9 +7572,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit code: 2
   Command: sh
-  Arguments: -c cross-env NODE_ENV=test jest --config=jest.config.json
+  Arguments: -c webpack --config webpack.prod.js
   Directory: /home/ksh/projects/expensify-app
   Output:
   

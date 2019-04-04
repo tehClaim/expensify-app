@@ -22,7 +22,8 @@ module.exports = {
     ),
     new HtmlWebpackPlugin({
       title: 'Expensify App',
-      filename: 'index.html'
+      filename: '../index.html',
+      favicon: 'public/favicon.png'
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",

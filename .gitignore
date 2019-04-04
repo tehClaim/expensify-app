@@ -1,5 +1,6 @@
 node_modules/
 .vscode/
 public/dist/
+public/index.html
 .env.test
 .env.development
