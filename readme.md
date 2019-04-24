@@ -1,3 +1,6 @@
-# Expensify Application
+# Expensify
 
-Dummy app from udemy.com/react-2nd-edition
+Contains list of expenses, posibility to add, remove, edit. Authentication through google account.
+Simple application, written primarly to practice my skills with react/redux.
+
+Deployed [here](https://tutorial-expensify.herokuapp.com/)
